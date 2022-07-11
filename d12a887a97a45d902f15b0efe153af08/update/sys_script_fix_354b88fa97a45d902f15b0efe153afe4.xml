@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description/>
+        <name>Test/Scratchpad</name>
+        <record_for_rollback>true</record_for_rollback>
+        <script><![CDATA[function getGroup(name, sys_id) {
+	var found = true;
+
+	var groupGR = new GlideRecord('sys_user_group');
+	if ( ! groupGR.get(data.origin_sys_id) ) {
+		if ( !groupGR.get("name", name) ) {
+			found = false;
+		}
+	}	
+
+	return (found) ? groupGR : null;
+}
+
+function groupSync( data ) {
+	var group = getGroup( data.name, data.origin_sys_id );  
+  gs.info( "group: "+ group );
+	if (!group) {
+    gs.info(" notgroup?");
+		if (data.action=="delete") {
+			return;
+		} else {
+			group = new GlideRecord('sys_user_group');
+			group.newRecord();
+			group.setValue("name");
+			group.setNewGuidValue(data.origin_sys_id);
+			group.insert();
+		}
+	}
+	
+	if (data.action == "delete") {
+		group.deleteRecord();
+	} else {
+    if (group.getUniqueValue() != data.origin_sys_id)
+    gs.info("to update?");
+		group.setValue("name", data.name);
+		group.setValue("description", data.description);
+		group.setValue("type", data.type);
+    group.setValue("source", data.instance+":"+data.origin_sys_id);
+		group.update();
+	}
+}
+
+
+
+data = {
+	"name": "Product Owners",
+	"origin_sys_id": "d7c201ca1b180510c56e6311f54bcb0e",
+	"description": "This group is the parent group which houses all the  Product Owners within ServiceNow. ",
+  "instance": "dev12345",
+	"types": "c60381ca1b180510c56e6311f54bcb4f,7dbb14d39f320300730e5bb0657fcfea",
+	"action": "update"
+}
+groupSync( data );
+
+var gr = new GlideRecord('sys_user_group');
+gr.get('477a05d153013010b846ddeeff7b1225');
+gr;
+
+data = {
+	"name": gr.getValue("name")||"",
+	"origin_sys_id": gr.getUniqueValue(),
+	"description": gr.getValue("description")||"",
+	"types": gr.getValue("type")||"",
+  "instance": "dev12345",
+	"action": "update"
+}
+//gs.info( getGroup( data.name, data.origin_sys_id ) );]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>nick.fajardo@icf</sys_created_by>
+        <sys_created_on>2022-07-11 02:19:11</sys_created_on>
+        <sys_id>354b88fa97a45d902f15b0efe153afe4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test/Scratchpad</sys_name>
+        <sys_package display_value="GroupSync" source="x_685908_groupsync">d12a887a97a45d902f15b0efe153af08</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GroupSync">d12a887a97a45d902f15b0efe153af08</sys_scope>
+        <sys_update_name>sys_script_fix_354b88fa97a45d902f15b0efe153afe4</sys_update_name>
+        <sys_updated_by>nick.fajardo@icf</sys_updated_by>
+        <sys_updated_on>2022-07-11 02:19:11</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>
