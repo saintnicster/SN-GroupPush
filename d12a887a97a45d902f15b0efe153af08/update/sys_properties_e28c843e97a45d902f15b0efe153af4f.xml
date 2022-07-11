@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Instance name of the source instance.  Should match System Property 'instance_name', and is likely your production instance</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_685908_groupsync.source_instance</name>
+        <read_roles/>
+        <suffix>source_instance</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>nick.fajardo@icf</sys_created_by>
+        <sys_created_on>2022-07-11 02:24:13</sys_created_on>
+        <sys_id>e28c843e97a45d902f15b0efe153af4f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_685908_groupsync.source_instance</sys_name>
+        <sys_package display_value="GroupSync" source="x_685908_groupsync">d12a887a97a45d902f15b0efe153af08</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="GroupSync">d12a887a97a45d902f15b0efe153af08</sys_scope>
+        <sys_update_name>sys_properties_e28c843e97a45d902f15b0efe153af4f</sys_update_name>
+        <sys_updated_by>nick.fajardo@icf</sys_updated_by>
+        <sys_updated_on>2022-07-11 02:24:13</sys_updated_on>
+        <type>string</type>
+        <value/>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=e28c843e97a45d902f15b0efe153af4f"/>
+</record_update>
